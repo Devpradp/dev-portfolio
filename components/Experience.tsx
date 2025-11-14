@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, MapPin, Calendar } from 'lucide-react'
-import { useInView } from '@/hooks/useInView'
 
 interface ExperienceItem {
   title: string
@@ -132,20 +131,18 @@ function ExperienceCard({
 
 export default function Experience() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0)
-  const sectionRef = useRef<HTMLElement>(null)
-  const isSectionInView = useInView(sectionRef, { threshold: 0.3 })
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index)
   }
 
   return (
-    <section ref={sectionRef} id="experience" className="px-4 py-12">
+    <section id="experience" className="px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-4xl md:text-5xl font-extrabold text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           Experience
@@ -159,7 +156,7 @@ export default function Experience() {
               index={index}
               isExpanded={expandedIndex === index}
               onToggle={() => toggleExpand(index)}
-              isSectionInView={isSectionInView}
+              isSectionInView={true}
             />
           ))}
         </div>

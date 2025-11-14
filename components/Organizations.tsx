@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Award, Users, Calendar } from 'lucide-react'
-import { useInView } from '@/hooks/useInView'
 
 interface Organization {
   name: string
@@ -40,20 +39,18 @@ const organizations: Organization[] = [
 
 export default function Organizations() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0)
-  const sectionRef = useRef<HTMLElement>(null)
-  const isSectionInView = useInView(sectionRef, { threshold: 0.3 })
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index)
   }
 
   return (
-    <section ref={sectionRef} id="organizations" className="px-4 py-12">
+    <section id="organizations" className="px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-4xl md:text-5xl font-extrabold text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           Organizations
@@ -64,7 +61,7 @@ export default function Organizations() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-card-light dark:bg-card-dark rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow border border-border-light dark:border-border-dark"
             >
