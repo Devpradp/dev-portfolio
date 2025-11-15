@@ -1,12 +1,125 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from './ThemeProvider'
 import { cn } from '@/lib/utils'
+
+function ScrambleText({ text, onLoad = true }: { text: string; onLoad?: boolean }) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()'
+  const [mounted, setMounted] = useState(false)
+  
+  // Start with scrambled text
+  const getScrambledText = (target: string) => {
+    return target
+      .split('')
+      .map((char) => (char === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)]))
+      .join('')
+  }
+
+  // Start with actual text to avoid hydration mismatch
+  const [displayText, setDisplayText] = useState(text)
+  const [isHovered, setIsHovered] = useState(false)
+  const scrambleIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const textRef = useRef(text)
+  const hasScrambledOnLoad = useRef(false)
+
+  // Update ref when text changes
+  useEffect(() => {
+    textRef.current = text
+  }, [text])
+
+  const scramble = useCallback(() => {
+    let iterations = 0
+    const targetText = textRef.current
+
+    if (scrambleIntervalRef.current) {
+      clearInterval(scrambleIntervalRef.current)
+    }
+
+    // Start with scrambled text
+    setDisplayText(getScrambledText(targetText))
+
+    scrambleIntervalRef.current = setInterval(() => {
+      setDisplayText((prev) => {
+        return prev
+          .split('')
+          .map((char, index) => {
+            if (char === ' ') return ' '
+            if (index < iterations) {
+              return targetText[index]
+            }
+            return chars[Math.floor(Math.random() * chars.length)]
+          })
+          .join('')
+      })
+
+      iterations += 1 / 3
+
+      if (iterations >= targetText.length) {
+        if (scrambleIntervalRef.current) {
+          clearInterval(scrambleIntervalRef.current)
+        }
+        setDisplayText(targetText)
+      }
+    }, 30)
+  }, [])
+
+  // Set mounted state after hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (onLoad && mounted && !hasScrambledOnLoad.current) {
+      // Initial scramble on load - only after component is mounted (client-side)
+      const timer = setTimeout(() => {
+        // Start with scrambled text
+        setDisplayText(getScrambledText(textRef.current))
+        hasScrambledOnLoad.current = true
+        scramble()
+      }, 100)
+
+      return () => {
+        clearTimeout(timer)
+        if (scrambleIntervalRef.current) {
+          clearInterval(scrambleIntervalRef.current)
+        }
+      }
+    }
+  }, [onLoad, mounted, scramble])
+
+  useEffect(() => {
+    if (isHovered) {
+      scramble()
+    } else {
+      // When hover ends, clear any ongoing scramble and show original text
+      if (scrambleIntervalRef.current) {
+        clearInterval(scrambleIntervalRef.current)
+        scrambleIntervalRef.current = null
+      }
+      setDisplayText(textRef.current)
+    }
+
+    return () => {
+      if (scrambleIntervalRef.current) {
+        clearInterval(scrambleIntervalRef.current)
+      }
+    }
+  }, [isHovered, scramble])
+
+  return (
+    <span
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {displayText}
+    </span>
+  )
+}
 
 const navItems = [
   { title: 'Home', href: '/' },
@@ -51,7 +164,7 @@ export default function Navigation() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Dev Pradeep
+                <ScrambleText text="Dev Pradeep" />
               </motion.div>
             </Link>
 
