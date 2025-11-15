@@ -2,6 +2,117 @@
 
 import { motion } from 'framer-motion'
 import { Mail, Linkedin, Github } from 'lucide-react'
+import { useEffect, useState, useRef } from 'react'
+
+function CursorHighlight({ children }: { children: React.ReactNode }) {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+  const [boxPosition, setBoxPosition] = useState({ x: 0, y: 0, width: 0, height: 0 })
+  const [isAnimating, setIsAnimating] = useState(false)
+  const containerRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    // Reset state when component mounts (page refresh/navigation)
+    setCursorPosition({ x: 0, y: 0 })
+    setBoxPosition({ x: 0, y: 0, width: 0, height: 0 })
+    setIsAnimating(false)
+
+    // Start animation after a short delay
+    const startTimer = setTimeout(() => {
+      setIsAnimating(true)
+    }, 800)
+
+    return () => clearTimeout(startTimer)
+  }, [])
+
+  useEffect(() => {
+    if (!isAnimating || !containerRef.current) return
+
+    const container = containerRef.current
+    const padding = 8 // Padding around the text for the box (even on all sides)
+    const cursorOffset = 12 // Offset cursor from box corner
+    
+    // Start position (top-left)
+    const startX = -padding
+    const startY = -padding
+    // End position (bottom-right)
+    const endX = container.offsetWidth + padding
+    const endY = container.offsetHeight + padding
+
+    const duration = 500 // 0.8 seconds for faster animation
+    const updateInterval = 16 // ~60fps
+    const totalSteps = duration / updateInterval
+    let currentStep = 0
+
+    const interval = setInterval(() => {
+      const progress = currentStep / totalSteps
+
+      if (progress >= 1) {
+        // Animation complete - stop
+        clearInterval(interval)
+        return
+      }
+
+      // Cursor moves from start to end with offset from corner
+      const x = startX + (endX - startX) * progress + cursorOffset
+      const y = startY + (endY - startY) * progress + cursorOffset
+
+      setCursorPosition({ x, y })
+
+      // Box expands from start position to end position
+      setBoxPosition({
+        x: startX,
+        y: startY,
+        width: (endX - startX) * progress,
+        height: (endY - startY) * progress,
+      })
+
+      currentStep++
+    }, updateInterval)
+
+    return () => clearInterval(interval)
+  }, [isAnimating])
+
+  return (
+    <span ref={containerRef} className="relative inline-block">
+      {children}
+      {/* Selection box that expands as cursor drags */}
+      <motion.div
+        className="absolute border-2 border-accent-light dark:border-accent-dark pointer-events-none rounded-sm"
+        style={{
+          left: `${boxPosition.x}px`,
+          top: `${boxPosition.y}px`,
+          width: `${boxPosition.width}px`,
+          height: `${boxPosition.height}px`,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isAnimating ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      />
+      {/* Cursor icon that moves around the box */}
+      <motion.div
+        className="absolute pointer-events-none z-10"
+        style={{
+          left: `${cursorPosition.x}px`,
+          top: `${cursorPosition.y}px`,
+          transform: 'translate(-50%, -50%)',
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isAnimating ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="text-accent-light dark:text-accent-dark drop-shadow-lg"
+        >
+          <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+        </svg>
+      </motion.div>
+    </span>
+  )
+}
 
 export default function About() {
   const containerVariants = {
@@ -51,9 +162,11 @@ export default function About() {
               variants={itemVariants}
             >
               Hi, I'm{' '}
-              <span className="text-accent-light dark:text-accent-dark">
-                Dev Pradeep
-              </span>
+              <CursorHighlight>
+                <span className="text-accent-light dark:text-accent-dark">
+                  Dev Pradeep
+                </span>
+              </CursorHighlight>
             </motion.h1>
 
             <motion.p
