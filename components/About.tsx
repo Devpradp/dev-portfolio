@@ -1,14 +1,9 @@
 'use client'
 
-import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Linkedin, Github } from 'lucide-react'
-import { useInView } from '@/hooks/useInView'
 
 export default function About() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const isSectionInView = useInView(sectionRef, { threshold: 0.3 })
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,12 +20,12 @@ export default function About() {
   }
 
   return (
-    <section ref={sectionRef} id="about" className="min-h-[80vh] flex items-center justify-center px-4 py-12 pt-32">
+    <section id="about" className="min-h-[80vh] flex items-center justify-center px-4 py-12 pt-32">
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isSectionInView ? 'visible' : 'hidden'}
+          animate="visible"
           className="grid md:grid-cols-2 gap-12 items-center"
         >
           {/* Profile Image */}
@@ -53,9 +48,7 @@ export default function About() {
           <motion.div variants={itemVariants} className="space-y-6">
             <motion.h1
               className="text-5xl md:text-6xl font-extrabold"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              variants={itemVariants}
             >
               Hi, I'm{' '}
               <span className="text-accent-light dark:text-accent-dark">
@@ -65,30 +58,24 @@ export default function About() {
 
             <motion.p
               className="text-xl font-semibold text-foreground-light dark:text-foreground-dark"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              variants={itemVariants}
             >
-              Software Engineer & Co-Founder at Melong
+              Computer Science Student at University at Buffalo
             </motion.p>
 
             <motion.p
               className="text-lg font-medium text-foreground-light dark:text-foreground-dark leading-relaxed"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              variants={itemVariants}
             >
-              Currently pursuing a Bachelor of Science in Computer Science at University at Buffalo
-              (GPA: 3.78), expected to graduate in May 2027. Passionate about building innovative
+              Currently pursuing a Bachelor of Science in Computer Science at University at Buffalo, 
+              expected to graduate in May 2027. Passionate about building innovative
               software solutions and creating impactful user experiences.
             </motion.p>
 
             {/* Contact Links */}
             <motion.div
               className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              variants={itemVariants}
             >
               <motion.a
                 href="mailto:dev.pradeep@outlook.com"

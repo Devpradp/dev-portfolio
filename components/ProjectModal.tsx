@@ -3,6 +3,13 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Github, ExternalLink } from 'lucide-react'
+import ProjectSlideshow from './ui/ProjectSlideshow'
+
+export interface MediaItem {
+  type: 'image' | 'video'
+  url: string
+  alt?: string
+}
 
 interface Project {
   name: string
@@ -11,6 +18,7 @@ interface Project {
   achievements: string[]
   github?: string
   demo?: string
+  media?: MediaItem[]
 }
 
 interface ProjectModalProps {
@@ -74,6 +82,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   <X className="w-6 h-6" />
                 </motion.button>
               </div>
+
+              {/* Slideshow */}
+              {project.media && project.media.length > 0 && (
+                <ProjectSlideshow media={project.media} />
+              )}
 
               {/* Content */}
               <div className="p-6 space-y-6">

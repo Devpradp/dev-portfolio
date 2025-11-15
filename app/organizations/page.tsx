@@ -1,17 +1,15 @@
 'use client'
 
 import Navigation from '@/components/Navigation'
-import About from '@/components/About'
-import Skills from '@/components/Skills'
+import Organizations from '@/components/Organizations'
 import PageTransition from '@/components/PageTransition'
 
-export default function Home() {
+export default function OrganizationsPage() {
   return (
     <PageTransition>
       <main className="min-h-screen bg-background-light dark:bg-background-dark">
         <Navigation />
-        <About />
-        <Skills />
+        <Organizations />
       </main>
     </PageTransition>
   )

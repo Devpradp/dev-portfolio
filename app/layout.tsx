@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'Dev Pradeep | Portfolio',
-  description: 'Software Engineer & Co-Founder at Melong',
+  description: 'Computer Science Student at University at Buffalo',
 }
 
 export default function RootLayout({

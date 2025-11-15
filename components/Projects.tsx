@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { CometCard } from '@/components/ui/comet-card'
-import ProjectModal from '@/components/ProjectModal'
-import { useInView } from '@/hooks/useInView'
+import { Carousel, Card } from '@/components/ui/apple-cards-carousel'
+import ProjectModal, { MediaItem } from '@/components/ProjectModal'
 
 interface Project {
   name: string
@@ -14,6 +13,7 @@ interface Project {
   github?: string
   demo?: string
   imageUrl: string
+  media?: MediaItem[]
 }
 
 const projects: Project[] = [
@@ -31,6 +31,23 @@ const projects: Project[] = [
       'Monitored 25+ live camera feeds simultaneously',
     ],
     imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+    media: [
+      {
+        type: 'video',
+        url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        alt: 'EDEN Demo Video',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'EDEN Security System',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'EDEN Dashboard',
+      },
+    ],
   },
   {
     name: 'LovaSlide (HackHarvard 2025)',
@@ -44,87 +61,78 @@ const projects: Project[] = [
       'Built intelligent multi-agent system for document processing',
     ],
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+    media: [
+      {
+        type: 'video',
+        url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+        alt: 'LovaSlide Demo Video',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'LovaSlide Presentation',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'LovaSlide Interface',
+      },
+    ],
   },
 ]
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-  const isSectionInView = useInView(sectionRef, { threshold: 0.3 })
 
-  const handleProjectClick = (project: Project) => {
-    setSelectedProject(project)
+  const handleCardClick = (index: number) => {
+    setSelectedProject(projects[index])
     setIsModalOpen(true)
   }
 
   const handleCloseModal = () => {
     setIsModalOpen(false)
-    setTimeout(() => setSelectedProject(null), 300) // Delay to allow exit animation
+    setTimeout(() => setSelectedProject(null), 300)
   }
+
+  const cards = projects.map((project, index) => {
+    return (
+      <Card
+        key={project.name}
+        card={{
+          title: project.name,
+          src: project.imageUrl,
+          content: null, // Not needed since we're using modal
+        }}
+        index={index}
+        active={0}
+        onCardClick={() => handleCardClick(index)}
+      />
+    )
+  })
 
   return (
     <>
-      <section ref={sectionRef} id="projects" className="px-4 py-12">
-        <div className="max-w-7xl mx-auto">
+      <section id="projects" className="min-h-screen px-0 py-12 flex flex-col">
+        <div className="w-full flex-1 flex flex-col">
           <motion.h2
-            className="text-4xl md:text-5xl font-extrabold text-center mb-10"
+            className="text-4xl md:text-5xl font-extrabold text-center mb-10 px-4"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Projects
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 30 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="w-full max-w-lg"
-              >
-                <CometCard>
-                  <button
-                    type="button"
-                    onClick={() => handleProjectClick(project)}
-                    className="flex w-full cursor-pointer flex-col items-stretch rounded-[16px] border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-2 saturate-0 hover:saturate-100 transition-all duration-300"
-                    aria-label={`View ${project.name}`}
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      transform: 'none',
-                      opacity: 1,
-                    }}
-                  >
-                    <div className="mx-2 flex-1">
-                      <div className="relative mt-2 aspect-video w-full overflow-hidden rounded-[16px]">
-                        <img
-                          loading="lazy"
-                          className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover contrast-75"
-                          alt={`${project.name} background`}
-                          src={project.imageUrl}
-                          style={{
-                            boxShadow: 'rgba(0, 0, 0, 0.05) 0px 5px 6px 0px',
-                            opacity: 1,
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex flex-shrink-0 items-center justify-between p-4 font-mono text-foreground-light dark:text-foreground-dark">
-                      <div className="text-base font-bold">{project.name}</div>
-                      <div className="text-xs text-foreground-light/50 dark:text-foreground-dark/50">#{index + 1}</div>
-                    </div>
-                  </button>
-                </CometCard>
-              </motion.div>
-            ))}
-          </div>
+          <Carousel items={cards} onCardClick={handleCardClick} />
         </div>
       </section>
 
-      <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={handleCloseModal} />
+      <ProjectModal 
+        project={selectedProject} 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
     </>
   )
 }
-
