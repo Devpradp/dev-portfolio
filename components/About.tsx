@@ -158,13 +158,15 @@ export default function About() {
           {/* Content */}
           <motion.div variants={itemVariants} className="space-y-6">
             <motion.h1
-              className="text-5xl md:text-6xl font-extrabold"
-              variants={itemVariants}
+              className="text-5xl md:text-6xl font-extrabold font-heading leading-tight"
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              Hi, I'm{' '}
+              <span className="block mb-2">HI, I'M</span>
               <CursorHighlight>
                 <span className="text-accent-light dark:text-accent-dark">
-                  Dev Pradeep
+                  DEV PRADEEP
                 </span>
               </CursorHighlight>
             </motion.h1>

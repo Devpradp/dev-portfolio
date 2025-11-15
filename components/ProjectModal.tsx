@@ -72,7 +72,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             >
               {/* Header */}
               <div className="sticky top-0 bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark p-6 flex items-start justify-between z-10">
-                <h2 className="text-3xl font-extrabold">{project.name}</h2>
+                    <h2 className="text-3xl font-extrabold font-heading">{project.name}</h2>
                 <motion.button
                   onClick={onClose}
                   className="p-2 rounded-lg hover:bg-foreground-light/10 dark:hover:bg-foreground-dark/10 transition-colors"
@@ -92,7 +92,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               <div className="p-6 space-y-6">
                 {/* Technologies */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Technologies & Languages</h3>
+                      <h3 className="text-lg font-semibold font-heading mb-3">Technologies & Languages</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, i) => (
                       <span
@@ -107,7 +107,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                 {/* Description */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Description</h3>
+                      <h3 className="text-lg font-semibold font-heading mb-3">Description</h3>
                   <div className="space-y-3">
                     {project.description.map((desc, i) => (
                       <p key={i} className="text-foreground-light dark:text-foreground-dark leading-relaxed">
@@ -119,7 +119,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                 {/* Key Achievements */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Key Achievements</h3>
+                      <h3 className="text-lg font-semibold font-heading mb-3">Key Achievements</h3>
                   <ul className="space-y-2">
                     {project.achievements.map((achievement, i) => (
                       <li

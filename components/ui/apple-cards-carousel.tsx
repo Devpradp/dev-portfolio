@@ -54,7 +54,7 @@ export const Card = React.memo(
               
               {/* Title at Bottom */}
               <div className="absolute bottom-4 left-4 right-4 z-20">
-                <h3 className="text-2xl md:text-3xl font-extrabold text-white drop-shadow-lg">
+                    <h3 className="text-2xl md:text-3xl font-extrabold font-heading text-white drop-shadow-lg">
                   {card.title}
                 </h3>
               </div>

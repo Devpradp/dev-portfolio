@@ -158,13 +158,13 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-16">
             <Link
               href="/"
-              className="text-xl font-extrabold text-accent-light dark:text-accent-dark"
+              className="text-xl font-extrabold font-heading text-accent-light dark:text-accent-dark"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <ScrambleText text="Dev Pradeep" />
+                <ScrambleText text="DEV PRADEEP" />
               </motion.div>
             </Link>
 
