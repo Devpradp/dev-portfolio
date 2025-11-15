@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Carousel, Card } from '@/components/ui/apple-cards-carousel'
-import ProjectModal from '@/components/ProjectModal'
+import ProjectModal, { MediaItem } from '@/components/ProjectModal'
 
 interface Project {
   name: string
@@ -13,6 +13,7 @@ interface Project {
   github?: string
   demo?: string
   imageUrl: string
+  media?: MediaItem[]
 }
 
 const projects: Project[] = [
@@ -30,6 +31,23 @@ const projects: Project[] = [
       'Monitored 25+ live camera feeds simultaneously',
     ],
     imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+    media: [
+      {
+        type: 'video',
+        url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        alt: 'EDEN Demo Video',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'EDEN Security System',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'EDEN Dashboard',
+      },
+    ],
   },
   {
     name: 'LovaSlide (HackHarvard 2025)',
@@ -43,6 +61,23 @@ const projects: Project[] = [
       'Built intelligent multi-agent system for document processing',
     ],
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+    media: [
+      {
+        type: 'video',
+        url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+        alt: 'LovaSlide Demo Video',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'LovaSlide Presentation',
+      },
+      {
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.1.0',
+        alt: 'LovaSlide Interface',
+      },
+    ],
   },
 ]
 
