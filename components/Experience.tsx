@@ -69,7 +69,7 @@ function ExperienceCard({
       >
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <h3 className="text-2xl font-extrabold mb-2">{exp.title}</h3>
+            <h3 className="text-2xl font-extrabold font-heading mb-2">{exp.title}</h3>
             <p className="text-xl text-accent-light dark:text-accent-dark mb-3">
               {exp.company}
             </p>
@@ -140,7 +140,7 @@ export default function Experience() {
     <section id="experience" className="px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-4xl md:text-5xl font-extrabold text-center mb-10"
+          className="text-4xl md:text-5xl font-extrabold font-heading text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

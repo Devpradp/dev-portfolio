@@ -50,7 +50,7 @@ export default function Skills() {
     <section ref={sectionRef} id="skills" className="px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-4xl md:text-5xl font-extrabold text-center mb-10"
+          className="text-4xl md:text-5xl font-extrabold font-heading text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 20 }}
           transition={{ duration: 0.6 }}
@@ -66,7 +66,7 @@ export default function Skills() {
               animate={{ opacity: isSectionInView ? 1 : 0, y: isSectionInView ? 0 : 30 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-center">{category.title}</h3>
+              <h3 className="text-2xl font-bold font-heading mb-6 text-center">{category.title}</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div

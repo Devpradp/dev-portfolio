@@ -116,7 +116,7 @@ export default function Projects() {
       <section id="projects" className="min-h-screen px-0 py-12 flex flex-col">
         <div className="w-full flex-1 flex flex-col">
           <motion.h2
-            className="text-4xl md:text-5xl font-extrabold text-center mb-10 px-4"
+            className="text-4xl md:text-5xl font-extrabold font-heading text-center mb-10 px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

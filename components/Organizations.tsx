@@ -48,7 +48,7 @@ export default function Organizations() {
     <section id="organizations" className="px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-4xl md:text-5xl font-extrabold text-center mb-10"
+          className="text-4xl md:text-5xl font-extrabold font-heading text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -74,7 +74,7 @@ export default function Organizations() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-2xl font-extrabold">{org.name}</h3>
+                      <h3 className="text-2xl font-extrabold font-heading">{org.name}</h3>
                       {index === 0 && (
                         <motion.div
                           className="flex items-center gap-1 px-3 py-1 bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 rounded-full text-xs font-semibold"
