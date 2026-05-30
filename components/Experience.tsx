@@ -60,13 +60,13 @@ export default function Experience() {
             >
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="shrink-0 flex items-center h-8">
+                  <div className="shrink-0 flex items-center h-8 bg-white">
                     <Image
                       src={exp.logo}
                       alt={`${exp.company} logo`}
                       width={exp.logoWidth}
                       height={exp.logoHeight}
-                      className="object-contain h-7 w-auto"
+                      className="object-contain h-7 w-auto bg-white"
                     />
                   </div>
                   <div className="min-w-0">
