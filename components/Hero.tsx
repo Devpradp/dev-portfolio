@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="max-w-portfolio mx-auto px-5 sm:px-10 pt-16 pb-14 sm:pt-20 sm:pb-16 flex flex-col-reverse sm:flex-row items-center gap-10 border-b border-slate-200"
+      className="max-w-portfolio mx-auto px-5 sm:px-10 pt-16 pb-14 sm:pt-20 sm:pb-16 flex flex-col-reverse sm:flex-row sm:items-start gap-10 border-b border-slate-200"
     >
       {/* Left: text */}
       <div className="flex-1 w-full">
@@ -98,7 +98,7 @@ export default function Hero() {
           alt="Dev Pradeep"
           width={160}
           height={160}
-          className="w-36 h-36 sm:w-40 sm:h-40 rounded-2xl object-cover border border-slate-200"
+          className="w-52 h-52 sm:w-60 sm:h-60 rounded-2xl object-cover border border-slate-200"
           priority
         />
       </div>
