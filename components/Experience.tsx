@@ -87,7 +87,7 @@ export default function Experience() {
                 </div>
               </div>
 
-              <ul className="space-y-1.5 mb-4">
+              <ul className={`space-y-1.5 ${exp.tech.length > 0 ? "mb-4" : ""}`}>
                 {exp.bullets.map((bullet) => (
                   <li
                     key={bullet}
