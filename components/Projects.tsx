@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { pillColor } from "@/lib/pill-color";
 
 interface ProjectLink {
   label: string;
@@ -79,14 +80,17 @@ export default function Projects() {
               </p>
 
               <div className="flex flex-wrap gap-1.5 mb-4">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] bg-slate-50 border border-slate-200 text-slate-500 px-2 py-0.5 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {project.tags.map((tag) => {
+                  const c = pillColor(tag);
+                  return (
+                    <span
+                      key={tag}
+                      className={`text-[10px] border px-2 py-0.5 rounded-full ${c.bg} ${c.text} ${c.border}`}
+                    >
+                      {tag}
+                    </span>
+                  );
+                })}
               </div>
 
               <div className="flex gap-4">
