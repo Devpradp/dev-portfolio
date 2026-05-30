@@ -4,9 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
+  { label: "Experience", href: "#experience" },
   { label: "Work", href: "#projects" },
   { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
 ];
 
 export default function Nav() {
@@ -58,12 +58,6 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="bg-slate-900 text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-slate-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
-          >
-            Hire me →
-          </a>
         </nav>
 
         {/* Mobile hamburger */}
@@ -97,13 +91,6 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-md text-center hover:bg-slate-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
-            onClick={() => setOpen(false)}
-          >
-            Hire me →
-          </a>
         </div>
       )}
     </header>
