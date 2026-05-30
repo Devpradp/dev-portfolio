@@ -27,6 +27,7 @@ const experiences: ExperienceEntry[] = [
     bullets: [
       "Maintaining and scaling an academic TraceTool used in CSE 115/116, supporting 500+ students annually and 5,000+ submissions per semester.",
       "Contributing to system design for multi-institution deployment, improving concurrency and scalability to reliably handle 5,000+ submissions per semester under peak load.",
+      "Working with course staff to ensure correct and consistent memory modeling and tracing behavior, improving reliability and clarity of the tool as student usage continues to grow.",
     ],
     tech: [],
   },
@@ -42,6 +43,7 @@ const experiences: ExperienceEntry[] = [
     bullets: [
       "Engineered 40+ automated end-to-end tests within a two-week Agile release cycle for the DYNAC traffic management platform using Ranorex and Selenium, reducing manual regression testing by 6 hours per release.",
       "Built CI/CD pipelines in GitLab CI triggering automated test suites on every commit, reducing manual QA effort from 4h → 30m and surfacing 12 defects before staging.",
+      "Identified and documented 15+ defects through automated UI and integration tests, improving release stability for a platform deployed across multiple municipal traffic operations centers.",
     ],
     tech: ["Selenium", "Ranorex", "GitLab CI"],
   },
