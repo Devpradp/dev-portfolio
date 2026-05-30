@@ -19,6 +19,9 @@ export default function FadeIn({
     const el = ref.current;
     if (!el) return;
 
+    // Apply hidden state only after mount — avoids SSR flashing opacity:0
+    el.classList.add("fade-in-hidden");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -37,7 +40,7 @@ export default function FadeIn({
   }, [delay]);
 
   return (
-    <div ref={ref} className={`fade-in-hidden ${className}`}>
+    <div ref={ref} className={className || undefined}>
       {children}
     </div>
   );

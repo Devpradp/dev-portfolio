@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
@@ -11,6 +11,34 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    // Close on Escape
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    // Focus trap — keep focus inside drawer while open
+    const onFocus = (e: FocusEvent) => {
+      if (drawerRef.current && !drawerRef.current.contains(e.target as Node)) {
+        // Return focus to first focusable element in drawer
+        const first = drawerRef.current.querySelector<HTMLElement>(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        );
+        first?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("focusin", onFocus);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("focusin", onFocus);
+    };
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-200">
@@ -54,6 +82,7 @@ export default function Nav() {
       {open && (
         <div
           id="mobile-nav"
+          ref={drawerRef}
           role="navigation"
           aria-label="Mobile navigation"
           className="sm:hidden border-t border-slate-200 bg-white px-5 py-4 flex flex-col gap-4"
