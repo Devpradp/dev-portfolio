@@ -66,7 +66,7 @@ export default function Experience() {
                       alt={`${exp.company} logo`}
                       width={exp.logoWidth}
                       height={exp.logoHeight}
-                      className="object-contain h-7 w-auto"
+                      className="object-contain h-7 w-auto bg-white"
                     />
                   </div>
                   <div className="min-w-0">
