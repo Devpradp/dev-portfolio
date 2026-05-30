@@ -1,8 +1,8 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
 
@@ -15,13 +15,13 @@ export default function Home() {
           <Hero />
         </FadeIn>
         <FadeIn delay={50}>
+          <Experience />
+        </FadeIn>
+        <FadeIn delay={50}>
           <Projects />
         </FadeIn>
         <FadeIn delay={50}>
           <Skills />
-        </FadeIn>
-        <FadeIn delay={50}>
-          <Contact />
         </FadeIn>
         <Footer />
       </div>
