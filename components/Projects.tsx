@@ -30,7 +30,7 @@ const projects: Project[] = [
       "Mapbox",
       "Twilio",
     ],
-    links: [{ label: "GitHub", href: "https://github.com/devpradp" }],
+    links: [{ label: "GitHub", href: "https://github.com/OmSethi/EDEN" }],
   },
   {
     name: "LovaSlide",
@@ -38,7 +38,7 @@ const projects: Project[] = [
     description:
       "AI tool that transforms documents into polished, data-driven presentations. 90% faster than Gamma AI. RAG pipeline cross-checks generated claims against live SerpAPI sources before render.",
     tags: ["Python", "Next.js", "FastAPI", "OpenAI API", "SerpAPI"],
-    links: [{ label: "GitHub", href: "https://github.com/devpradp" }],
+    links: [{ label: "GitHub", href: "https://github.com/diggygeorge/lovaslide" }],
   },
 ];
 
