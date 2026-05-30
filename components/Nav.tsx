@@ -43,6 +43,8 @@ export default function Nav() {
           className="sm:hidden text-slate-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 rounded p-1"
           onClick={() => setOpen((o) => !o)}
           aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -50,12 +52,17 @@ export default function Nav() {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="sm:hidden border-t border-slate-200 bg-white px-5 py-4 flex flex-col gap-4">
+        <div
+          id="mobile-nav"
+          role="navigation"
+          aria-label="Mobile navigation"
+          className="sm:hidden border-t border-slate-200 bg-white px-5 py-4 flex flex-col gap-4"
+        >
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-slate-700 hover:text-slate-900 transition-colors duration-150"
+              className="text-sm text-slate-700 hover:text-slate-900 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 rounded"
               onClick={() => setOpen(false)}
             >
               {l.label}
@@ -63,7 +70,7 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-md text-center hover:bg-slate-700 transition-colors duration-150"
+            className="bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-md text-center hover:bg-slate-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
             onClick={() => setOpen(false)}
           >
             Hire me →
