@@ -63,12 +63,12 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="https://github.com/devpradp"
+            href="https://1drv.ms/b/c/baac359db7beec33/IQBhattP8cB8QrQKh8ILoM1wAQZQu55smPDSXs4aIpGfRiQ?e=oHBD0H"
             target="_blank"
             rel="noopener noreferrer"
             className="border border-slate-300 text-slate-600 text-xs font-medium px-5 py-2.5 rounded-md hover:border-slate-500 hover:text-slate-900 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
           >
-            GitHub ↗
+            Resume ↗
           </a>
         </div>
 

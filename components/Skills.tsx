@@ -1,3 +1,5 @@
+import { pillColor } from "@/lib/pill-color";
+
 interface SkillGroup {
   label: string;
   skills: string[];
@@ -35,14 +37,17 @@ export default function Skills() {
                 {group.label}
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-[11px] bg-slate-50 border border-slate-200 text-slate-700 px-2.5 py-0.5 rounded-full"
-                  >
-                    {skill}
-                  </span>
-                ))}
+                {group.skills.map((skill) => {
+                  const c = pillColor(skill);
+                  return (
+                    <span
+                      key={skill}
+                      className={`text-[11px] border px-2.5 py-0.5 rounded-full ${c.bg} ${c.text} ${c.border}`}
+                    >
+                      {skill}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           ))}
