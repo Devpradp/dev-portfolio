@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { pillColor } from "@/lib/pill-color";
 
 interface ExperienceEntry {
   company: string;
@@ -11,7 +10,6 @@ interface ExperienceEntry {
   location: string;
   dates: string;
   bullets: string[];
-  tech: string[];
 }
 
 const experiences: ExperienceEntry[] = [
@@ -29,7 +27,6 @@ const experiences: ExperienceEntry[] = [
       "Contributing to system design for multi-institution deployment, improving concurrency and scalability to reliably handle 5,000+ submissions per semester under peak load.",
       "Working with course staff to ensure correct and consistent memory modeling and tracing behavior, improving reliability and clarity of the tool as student usage continues to grow.",
     ],
-    tech: [],
   },
   {
     company: "Kapsch TrafficCom",
@@ -45,7 +42,6 @@ const experiences: ExperienceEntry[] = [
       "Built CI/CD pipelines in GitLab CI triggering automated test suites on every commit, reducing manual QA effort from 4h → 30m and surfacing 12 defects before staging.",
       "Identified and documented 15+ defects through automated UI and integration tests, improving release stability for a platform deployed across multiple municipal traffic operations centers.",
     ],
-    tech: ["Selenium", "Ranorex", "GitLab CI"],
   },
 ];
 
@@ -89,7 +85,7 @@ export default function Experience() {
                 </div>
               </div>
 
-              <ul className={`space-y-1.5 ${exp.tech.length > 0 ? "mb-4" : ""}`}>
+              <ul className="space-y-1.5">
                 {exp.bullets.map((bullet) => (
                   <li
                     key={bullet}
@@ -102,22 +98,6 @@ export default function Experience() {
                   </li>
                 ))}
               </ul>
-
-              {exp.tech.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {exp.tech.map((t) => {
-                    const c = pillColor(t);
-                    return (
-                      <span
-                        key={t}
-                        className={`text-[10px] border px-2 py-0.5 rounded-full ${c.bg} ${c.text} ${c.border}`}
-                      >
-                        {t}
-                      </span>
-                    );
-                  })}
-                </div>
-              )}
             </article>
           ))}
         </div>
