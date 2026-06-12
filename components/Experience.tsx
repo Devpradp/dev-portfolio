@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FadeIn from "@/components/FadeIn";
 
 interface ExperienceEntry {
   company: string;
@@ -49,56 +50,57 @@ export default function Experience() {
   return (
     <section id="experience" className="border-b border-slate-200">
       <div className="max-w-portfolio mx-auto px-5 sm:px-10 py-14">
-        <h2 className="font-heading text-[22px] font-extrabold text-slate-900 tracking-tight mb-7">
-          Experience
-        </h2>
+        <FadeIn>
+          <h2 className="font-heading text-[22px] font-extrabold text-slate-900 tracking-tight mb-7">
+            Experience
+          </h2>
+        </FadeIn>
         <div className="flex flex-col gap-4">
-          {experiences.map((exp) => (
-            <article
-              key={exp.company}
-              className="bg-white border border-slate-200 rounded-xl p-5 hover:border-slate-900 hover:shadow-sm transition-all duration-150"
-            >
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="shrink-0 flex items-center h-8 bg-white">
-                    <Image
-                      src={exp.logo}
-                      alt={`${exp.company} logo`}
-                      width={exp.logoWidth}
-                      height={exp.logoHeight}
-                      className="object-contain h-7 w-auto bg-white"
-                    />
+          {experiences.map((exp, i) => (
+            <FadeIn key={exp.company} delay={i * 80}>
+              <article className="bg-white border border-slate-200 rounded-xl p-5 hover:border-slate-900 hover:shadow-md motion-safe:hover:-translate-y-0.5 transition-all duration-200">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="shrink-0 flex items-center h-8 bg-white">
+                      <Image
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        width={exp.logoWidth}
+                        height={exp.logoHeight}
+                        className="object-contain h-7 w-auto bg-white"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h3
+                        className="font-heading text-base font-extrabold leading-tight"
+                        style={{ color: exp.brandColor }}
+                      >
+                        {exp.company}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">{exp.role}</p>
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <h3
-                      className="font-heading text-[14px] font-extrabold leading-tight"
-                      style={{ color: exp.brandColor }}
-                    >
-                      {exp.company}
-                    </h3>
-                    <p className="text-[11px] text-slate-500 mt-0.5">{exp.role}</p>
+                  <div className="text-right shrink-0">
+                    <p className="text-xs text-slate-500 whitespace-nowrap">{exp.dates}</p>
+                    <p className="text-xs text-slate-500 whitespace-nowrap">{exp.location}</p>
                   </div>
                 </div>
-                <div className="text-right shrink-0">
-                  <p className="text-[10px] text-slate-400 whitespace-nowrap">{exp.dates}</p>
-                  <p className="text-[10px] text-slate-400 whitespace-nowrap">{exp.location}</p>
-                </div>
-              </div>
 
-              <ul className="space-y-1.5">
-                {exp.bullets.map((bullet) => (
-                  <li
-                    key={bullet}
-                    className="flex gap-2 text-xs text-slate-600 leading-relaxed"
-                  >
-                    <span className="text-slate-300 mt-0.5 shrink-0" aria-hidden="true">
-                      ▸
-                    </span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+                <ul className="space-y-1.5">
+                  {exp.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex gap-2 text-sm text-slate-600 leading-relaxed"
+                    >
+                      <span className="text-slate-300 mt-0.5 shrink-0" aria-hidden="true">
+                        ▸
+                      </span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </FadeIn>
           ))}
         </div>
       </div>

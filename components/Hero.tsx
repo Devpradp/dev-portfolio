@@ -40,41 +40,41 @@ export default function Hero() {
     >
       {/* Left: text */}
       <div className="flex-1 w-full">
-        <p className="text-[11px] tracking-[2px] uppercase text-slate-400 mb-3 font-body">
+        <p className="rise-1 text-xs tracking-[2px] uppercase text-slate-500 mb-3 font-body">
           Software Engineer
         </p>
-        <h1 className="font-heading text-5xl sm:text-[52px] font-black leading-none tracking-tighter text-slate-900">
+        <h1 className="rise-2 font-heading text-5xl sm:text-[52px] font-black leading-none tracking-tighter text-slate-900">
           Dev
           <br />
           Pradeep
         </h1>
-        <p className="text-lg text-slate-600 font-medium mt-3">
+        <p className="rise-3 text-lg text-slate-600 font-medium mt-3">
           CS @ University at Buffalo · Class of&nbsp;2027
         </p>
-        <p className="text-sm text-slate-400 leading-relaxed mt-3 max-w-[380px]">
+        <p className="rise-3 text-base text-slate-500 leading-relaxed mt-3 max-w-[420px]">
           Building AI-powered systems and full-stack products. 2× SWE intern.
         </p>
 
         {/* Primary CTAs */}
-        <div className="flex gap-3 mt-6 flex-wrap">
+        <div className="rise-4 flex gap-3 mt-6 flex-wrap">
           <a
             href="#projects"
-            className="bg-slate-900 text-white text-xs font-semibold px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
+            className="bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-slate-700 motion-safe:hover:-translate-y-px active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
           >
             View Projects
           </a>
           <a
-            href="https://1drv.ms/b/c/baac359db7beec33/IQBhattP8cB8QrQKh8ILoM1wAQZQu55smPDSXs4aIpGfRiQ?e=oHBD0H"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-slate-300 text-slate-600 text-xs font-medium px-5 py-2.5 rounded-md hover:border-slate-500 hover:text-slate-900 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
+            className="border border-slate-300 text-slate-600 text-sm font-medium px-5 py-2.5 rounded-md hover:border-slate-500 hover:text-slate-900 motion-safe:hover:-translate-y-px active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
           >
             Resume ↗
           </a>
         </div>
 
         {/* Social icon buttons */}
-        <div className="flex gap-2 mt-4 flex-wrap">
+        <div className="rise-4 flex gap-2 mt-4 flex-wrap">
           {socialLinks.map(({ label, href, icon: Icon, ariaLabel, external }) => (
             <a
               key={label}
@@ -82,9 +82,9 @@ export default function Hero() {
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
               aria-label={ariaLabel}
-              className="inline-flex items-center gap-1.5 border border-slate-200 bg-white text-slate-700 text-[11px] font-medium px-3 py-1.5 rounded-md hover:border-slate-400 hover:shadow-sm transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
+              className="inline-flex items-center gap-1.5 border border-slate-200 bg-white text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md hover:border-slate-400 hover:shadow-sm motion-safe:hover:-translate-y-px active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
             >
-              <Icon size={13} strokeWidth={2} aria-hidden="true" />
+              <Icon size={14} strokeWidth={2} aria-hidden="true" />
               {label}
             </a>
           ))}
@@ -92,12 +92,13 @@ export default function Hero() {
       </div>
 
       {/* Right: profile photo */}
-      <div className="flex-shrink-0">
+      <div className="rise-5 flex-shrink-0">
         <Image
-          src="/profile.JPG"
+          src="/profile-720.jpg"
           alt="Dev Pradeep"
-          width={160}
-          height={160}
+          width={240}
+          height={240}
+          sizes="(max-width: 640px) 208px, 240px"
           className="w-52 h-52 sm:w-60 sm:h-60 rounded-2xl object-cover border border-slate-200"
           priority
         />

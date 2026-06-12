@@ -6,12 +6,20 @@ interface FadeInProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  from?: "up" | "left" | "right";
 }
+
+const hiddenClass = {
+  up: "fade-in-hidden",
+  left: "fade-in-hidden-left",
+  right: "fade-in-hidden-right",
+} as const;
 
 export default function FadeIn({
   children,
   className = "",
   delay = 0,
+  from = "up",
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -20,13 +28,13 @@ export default function FadeIn({
     if (!el) return;
 
     // Apply hidden state only after mount — avoids SSR flashing opacity:0
-    el.classList.add("fade-in-hidden");
+    el.classList.add(hiddenClass[from]);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
-            el.classList.remove("fade-in-hidden");
+            el.classList.remove(hiddenClass[from]);
             el.classList.add("fade-in-visible");
           }, delay);
           observer.unobserve(el);
@@ -37,7 +45,7 @@ export default function FadeIn({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay]);
+  }, [delay, from]);
 
   return (
     <div ref={ref} className={className || undefined}>
