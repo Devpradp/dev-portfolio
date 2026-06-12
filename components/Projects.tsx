@@ -31,7 +31,10 @@ const projects: Project[] = [
       "Mapbox",
       "Twilio",
     ],
-    links: [{ label: "GitHub", href: "https://github.com/OmSethi/EDEN" }],
+    links: [
+      { label: "GitHub", href: "https://github.com/OmSethi/EDEN" },
+      { label: "Live Demo", href: "https://www.youtube.com/watch?v=FsOWvanoGHg" },
+    ],
   },
   {
     name: "LovaSlide",
@@ -39,14 +42,16 @@ const projects: Project[] = [
     description:
       "AI tool that transforms documents into polished, data-driven presentations. 90% faster than Gamma AI. RAG pipeline cross-checks generated claims against live SerpAPI sources before render.",
     tags: ["Python", "Next.js", "FastAPI", "OpenAI API", "SerpAPI"],
-    links: [{ label: "GitHub", href: "https://github.com/diggygeorge/lovaslide" }],
+    links: [
+      { label: "GitHub", href: "https://github.com/diggygeorge/lovaslide" },
+      { label: "Live Demo", href: "https://www.linkedin.com/posts/devpradeep-swe_hackharvard-harvard-hackathon-activity-7381682345419931648-jbc1?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD1u0P0BGb6G3or9KsxAN5R9nvFNA59aJRU" },
+    ],
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="border-b border-slate-200">
-      <div className="max-w-portfolio mx-auto px-5 sm:px-10 py-14">
+    <section id="projects" className="max-w-portfolio mx-auto px-5 sm:px-10 py-14 border-b border-slate-200">
         <FadeIn>
           <div className="flex justify-between items-baseline mb-7">
             <h2 className="font-heading text-[22px] font-extrabold text-slate-900 tracking-tight">
@@ -122,7 +127,6 @@ export default function Projects() {
             </FadeIn>
           ))}
         </div>
-      </div>
     </section>
   );
 }

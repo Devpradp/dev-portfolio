@@ -11,7 +11,6 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string | null>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,34 +40,8 @@ export default function Nav() {
     };
   }, [open]);
 
-  // Scrollspy — highlight the nav link for the section in view
-  useEffect(() => {
-    const sections = links
-      .map((l) => document.querySelector(l.href))
-      .filter((el): el is Element => el !== null);
-    if (sections.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
-          }
-        }
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-
-    sections.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const linkClass = (href: string) =>
-    `nav-link text-sm transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 rounded ${
-      active === href
-        ? "nav-link-active text-slate-900 font-medium"
-        : "text-slate-500 hover:text-slate-900"
-    }`;
+  const linkClass =
+    "nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 rounded";
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-200">
@@ -80,7 +53,7 @@ export default function Nav() {
         {/* Desktop links */}
         <nav className="hidden sm:flex items-center gap-6">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className={linkClass(l.href)}>
+            <a key={l.href} href={l.href} className={linkClass}>
               {l.label}
             </a>
           ))}
@@ -111,7 +84,7 @@ export default function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className={`self-start ${linkClass(l.href)}`}
+              className={`self-start ${linkClass}`}
               onClick={() => setOpen(false)}
             >
               {l.label}

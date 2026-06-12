@@ -85,8 +85,7 @@ html {
     transition: transform 200ms ease-out;
   }
 
-  .nav-link:hover::after,
-  .nav-link-active::after {
+  .nav-link:hover::after {
     transform: scaleX(1);
   }
 

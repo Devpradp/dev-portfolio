@@ -48,8 +48,7 @@ const experiences: ExperienceEntry[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="border-b border-slate-200">
-      <div className="max-w-portfolio mx-auto px-5 sm:px-10 py-14">
+    <section id="experience" className="max-w-portfolio mx-auto px-5 sm:px-10 py-14 border-b border-slate-200">
         <FadeIn>
           <h2 className="font-heading text-[22px] font-extrabold text-slate-900 tracking-tight mb-7">
             Experience
@@ -103,7 +102,6 @@ export default function Experience() {
             </FadeIn>
           ))}
         </div>
-      </div>
     </section>
   );
 }

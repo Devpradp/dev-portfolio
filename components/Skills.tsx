@@ -23,8 +23,7 @@ const skillGroups: SkillGroup[] = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="border-b border-slate-200">
-      <div className="max-w-portfolio mx-auto px-5 sm:px-10 py-14">
+    <section id="skills" className="max-w-portfolio mx-auto px-5 sm:px-10 py-14 border-b border-slate-200">
         <FadeIn>
           <h2 className="font-heading text-[22px] font-extrabold text-slate-900 tracking-tight mb-7">
             Skills
@@ -54,7 +53,6 @@ export default function Skills() {
             </FadeIn>
           ))}
         </div>
-      </div>
     </section>
   );
 }
