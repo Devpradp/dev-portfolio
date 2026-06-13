@@ -7,7 +7,12 @@
 interface TreeInstance {
   src: string;
   height: string; // vh — bottom-anchored
-  offset: number; // px from the panel's outer edge (left gutter: left, right gutter: right)
+  // Always a left-offset from the panel's own left edge:
+  //   Left panel:  left edge = screen-left  (outer); tree canopy extends rightward
+  //   Right panel: left edge = content edge (inner); flip:true mirrors canopy inward
+  // Using left for both prevents inner-edge clipping on the right panel, which
+  // happens when using `right: N` because `right + width > 210px` overflows left.
+  leftOffset: number;
   opacity: number;
   flip?: boolean;
 }
@@ -21,15 +26,19 @@ interface Leaf {
 
 // Front (most opaque/tallest) listed last so it paints on top.
 const leftTrees: TreeInstance[] = [
-  { src: "/trees/pine-b.png", height: "70vh", offset: -36, opacity: 0.18, flip: true },
-  { src: "/trees/pine.png", height: "82vh", offset: 46, opacity: 0.38 },
-  { src: "/trees/pine.png", height: "95vh", offset: -14, opacity: 0.62 },
+  { src: "/trees/pine-b.png", height: "62vh", leftOffset: -36, opacity: 0.18, flip: true },
+  { src: "/trees/pine.png",   height: "76vh", leftOffset:  46, opacity: 0.38 },
+  { src: "/trees/pine.png",   height: "86vh", leftOffset: -14, opacity: 0.62 },
 ];
 
+// Right panel: leftOffset=0 is the inner (content) edge, leftOffset=210 is the screen edge.
+// All flip:true so canopy faces inward. leftOffset keeps canopy from crossing inner edge:
+// with the tree anchored near the content edge, the trunk extends rightward (off-screen),
+// so overflow-hidden only clips the outer (screen) edge — exactly where we want it.
 const rightTrees: TreeInstance[] = [
-  { src: "/trees/pine-b.png", height: "74vh", offset: -28, opacity: 0.18 },
-  { src: "/trees/pine.png", height: "88vh", offset: 52, opacity: 0.38, flip: true },
-  { src: "/trees/pine.png", height: "92vh", offset: -18, opacity: 0.62, flip: true },
+  { src: "/trees/pine-b.png", height: "58vh", leftOffset: 62, opacity: 0.18, flip: true },
+  { src: "/trees/pine.png",   height: "72vh", leftOffset: 28, opacity: 0.38, flip: true },
+  { src: "/trees/pine.png",   height: "84vh", leftOffset:  4, opacity: 0.62, flip: true },
 ];
 
 const leftLeaves: Leaf[] = [
@@ -57,7 +66,7 @@ function Panel({
 }) {
   return (
     <div
-      className={`hidden min-[1280px]:block fixed inset-y-0 z-0 w-[210px] overflow-hidden pointer-events-none ${
+      className={`hidden min-[1280px]:block fixed top-14 bottom-0 z-0 w-[210px] overflow-hidden pointer-events-none ${
         side === "left" ? "left-0" : "right-0"
       }`}
     >
@@ -74,7 +83,7 @@ function Panel({
           style={{
             height: tree.height,
             opacity: tree.opacity,
-            [side]: `${tree.offset}px`,
+            left: `${tree.leftOffset}px`,
             transform: tree.flip ? "scaleX(-1)" : undefined,
           }}
         />
