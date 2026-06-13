@@ -3,7 +3,7 @@
 @theme {
   --font-family-heading: var(--font-archivo), system-ui, sans-serif;
   --font-family-body: var(--font-space-grotesk), system-ui, sans-serif;
-  --max-width-portfolio: 860px;
+  --max-width-portfolio: 760px;
 }
 
 html {

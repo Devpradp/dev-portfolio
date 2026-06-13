@@ -26,18 +26,19 @@ interface Leaf {
 
 // Front (most opaque/tallest) listed last so it paints on top.
 const leftTrees: TreeInstance[] = [
-  { src: "/trees/pine-b.png", height: "62vh", leftOffset: -14, opacity: 0.18, flip: true },
-  { src: "/trees/pine.png",   height: "76vh", leftOffset:  68, opacity: 0.38 },
-  { src: "/trees/pine.png",   height: "86vh", leftOffset:   8, opacity: 0.62 },
+  { src: "/trees/pine-b.png", height: "60vh", leftOffset:   6, opacity: 0.18, flip: true },
+  { src: "/trees/pine.png",   height: "72vh", leftOffset:  118, opacity: 0.38 },
+  { src: "/trees/pine.png",   height: "90vh", leftOffset:  28, opacity: 0.62 },
 ];
 
 // Right panel: leftOffset=0 is the inner (content) edge, leftOffset=210 is the screen edge.
-// All flip:true so canopy faces inward. Slight negative on the front tree is fine — those
-// pixels fall behind the z-10 content column and are invisible either way.
+// Flip values vary (not all true) so the canopies face different directions, breaking the
+// "lined up" look. The front tree intentionally goes negative so it peeks past the inner
+// edge — panel is overflow-visible so this is rendered (not clipped).
 const rightTrees: TreeInstance[] = [
-  { src: "/trees/pine-b.png", height: "58vh", leftOffset: 42, opacity: 0.18, flip: true },
-  { src: "/trees/pine.png",   height: "72vh", leftOffset:  8, opacity: 0.38, flip: true },
-  { src: "/trees/pine.png",   height: "84vh", leftOffset: -16, opacity: 0.62, flip: true },
+  { src: "/trees/pine-b.png", height: "75vh", leftOffset: -20, opacity: 0.18, flip: true },
+  { src: "/trees/pine.png",   height: "55vh", leftOffset:  150, opacity: 0.38, flip: false },
+  { src: "/trees/pine.png",   height: "90vh", leftOffset: 40, opacity: 0.62, flip: true },
 ];
 
 const leftLeaves: Leaf[] = [
@@ -65,8 +66,8 @@ function Panel({
 }) {
   return (
     <div
-      className={`hidden min-[1280px]:block fixed top-14 bottom-0 z-0 w-[210px] overflow-hidden pointer-events-none ${
-        side === "left" ? "left-0" : "right-0"
+      className={`hidden min-[1280px]:block fixed top-14 bottom-0 z-0 w-[280px] pointer-events-none ${
+        side === "left" ? "left-0 overflow-hidden" : "right-0 overflow-visible"
       }`}
     >
       {trees.map((tree, i) => (
