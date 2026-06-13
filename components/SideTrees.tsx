@@ -26,19 +26,18 @@ interface Leaf {
 
 // Front (most opaque/tallest) listed last so it paints on top.
 const leftTrees: TreeInstance[] = [
-  { src: "/trees/pine-b.png", height: "62vh", leftOffset: -36, opacity: 0.18, flip: true },
-  { src: "/trees/pine.png",   height: "76vh", leftOffset:  46, opacity: 0.38 },
-  { src: "/trees/pine.png",   height: "86vh", leftOffset: -14, opacity: 0.62 },
+  { src: "/trees/pine-b.png", height: "62vh", leftOffset: -14, opacity: 0.18, flip: true },
+  { src: "/trees/pine.png",   height: "76vh", leftOffset:  68, opacity: 0.38 },
+  { src: "/trees/pine.png",   height: "86vh", leftOffset:   8, opacity: 0.62 },
 ];
 
 // Right panel: leftOffset=0 is the inner (content) edge, leftOffset=210 is the screen edge.
-// All flip:true so canopy faces inward. leftOffset keeps canopy from crossing inner edge:
-// with the tree anchored near the content edge, the trunk extends rightward (off-screen),
-// so overflow-hidden only clips the outer (screen) edge — exactly where we want it.
+// All flip:true so canopy faces inward. Slight negative on the front tree is fine — those
+// pixels fall behind the z-10 content column and are invisible either way.
 const rightTrees: TreeInstance[] = [
-  { src: "/trees/pine-b.png", height: "58vh", leftOffset: 62, opacity: 0.18, flip: true },
-  { src: "/trees/pine.png",   height: "72vh", leftOffset: 28, opacity: 0.38, flip: true },
-  { src: "/trees/pine.png",   height: "84vh", leftOffset:  4, opacity: 0.62, flip: true },
+  { src: "/trees/pine-b.png", height: "58vh", leftOffset: 42, opacity: 0.18, flip: true },
+  { src: "/trees/pine.png",   height: "72vh", leftOffset:  8, opacity: 0.38, flip: true },
+  { src: "/trees/pine.png",   height: "84vh", leftOffset: -16, opacity: 0.62, flip: true },
 ];
 
 const leftLeaves: Leaf[] = [
