@@ -3,7 +3,7 @@
 @theme {
   --font-family-heading: var(--font-archivo), system-ui, sans-serif;
   --font-family-body: var(--font-space-grotesk), system-ui, sans-serif;
-  --max-width-portfolio: 860px;
+  --max-width-portfolio: 760px;
 }
 
 html {
@@ -67,6 +67,42 @@ html {
     animation-delay: 320ms;
   }
 
+  /* Falling leaves for the SideTrees gutter banners */
+  @keyframes leaf-fall {
+    0% {
+      transform: translate(0, -5vh) rotate(0deg);
+      opacity: 0;
+    }
+    8% {
+      opacity: 0.6;
+    }
+    25% {
+      transform: translate(16px, 22vh) rotate(95deg);
+    }
+    50% {
+      transform: translate(-12px, 48vh) rotate(185deg);
+    }
+    75% {
+      transform: translate(14px, 74vh) rotate(275deg);
+    }
+    92% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(0, 105vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .leaf {
+    position: absolute;
+    top: 0;
+    border-radius: 0 62% 0 62%;
+    opacity: 0;
+    animation: leaf-fall linear infinite;
+    will-change: transform;
+  }
+
   /* Nav links — underline slides in from the left on hover */
   .nav-link {
     position: relative;
@@ -111,6 +147,11 @@ html {
 
     .nav-link::after {
       transition: none;
+    }
+
+    .leaf {
+      animation: none;
+      opacity: 0;
     }
   }
 }
