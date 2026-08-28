@@ -17,7 +17,7 @@ const skillGroups: SkillGroup[] = [
   },
   {
     label: "Cloud & Tools",
-    skills: ["AWS", "GCP", "Docker", "GitLab CI", "Firebase", "MySQL"],
+    skills: ["AWS", "AWS Bedrock", "Aurora", "GCP", "Docker", "GitLab CI", "Firebase", "MySQL", "Claude Code", "Cursor", "Codex"],
   },
 ];
 

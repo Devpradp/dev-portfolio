@@ -15,6 +15,21 @@ interface ExperienceEntry {
 
 const experiences: ExperienceEntry[] = [
   {
+    company: "OneAuris",
+    logo: "/logos/oneauris.png",
+    logoWidth: 40,
+    logoHeight: 40,
+    brandColor: "#131C2E",
+    role: "Software Engineer",
+    location: "New York, NY",
+    dates: "May 2026 – Present",
+    bullets: [
+      "Shipped a production document-review platform used by 5+ law firms for active litigation, by building a full-stack OCR/AI pipeline (Next.js, Aurora, AWS Bedrock) under HIPAA/SOC 2 constraints.",
+      "Eliminated OOM crashes on large-document ingestion, cutting peak worker memory by 90% on 1,000+ page files, by adding page-level checkpointing and resumable OCR extraction.",
+      "Closed a PHI data-leak in document deletion, fixing orphaned OCR text in cloud storage, by shipping a same-day patch with full regression coverage across 1,400+ tests.",
+    ],
+  },
+  {
     company: "University at Buffalo",
     logo: "/logos/ub.png",
     logoWidth: 120,
@@ -66,7 +81,7 @@ export default function Experience() {
                         alt={`${exp.company} logo`}
                         width={exp.logoWidth}
                         height={exp.logoHeight}
-                        className="object-contain h-7 w-auto bg-white"
+                        className="object-contain h-7 w-auto bg-white rounded-[5px]"
                       />
                     </div>
                     <div className="min-w-0">

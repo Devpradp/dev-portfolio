@@ -52,7 +52,7 @@ export default function Hero() {
           CS @ University at Buffalo · Class of&nbsp;2027
         </p>
         <p className="rise-3 text-base text-slate-500 leading-relaxed mt-3 max-w-[420px]">
-          Building AI-powered systems and full-stack products. 2× SWE intern.
+          Software Engineer at OneAuris. Building AI-powered systems and full-stack products. 2× SWE intern.
         </p>
 
         {/* Primary CTAs */}
